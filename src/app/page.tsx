@@ -569,6 +569,11 @@ export default function Home() {
 function VideoSequence() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [phase, setPhase] = useState<number>(0); // 0: hero, 1: satellite
+  const sources = [
+    '/hero-video.mp4',
+    '/satellite.mp4',
+    '/farming.mp4',
+  ];
   const [durations, setDurations] = useState<number[]>([0, 0, 0]);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const pendingSeek = useRef<number | null>(null);
