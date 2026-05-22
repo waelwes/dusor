@@ -31,7 +31,7 @@ export default function Navbar() {
             src={lang === 'ar' ? '/logo/logo.png' : '/logo/Logo_English.png'} 
             alt="DOSUR" 
             style={{ 
-              height: '56px', 
+              height: '50px', 
               width: 'auto', 
               display: 'block',
               objectFit: 'contain'
