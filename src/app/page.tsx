@@ -577,7 +577,6 @@ function VideoSequence() {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const pendingSeek = useRef<number | null>(null);
 
-        preload={phase === 0 ? 'auto' : 'metadata'}
 
   useEffect(() => {
     const v = videoRef.current;
