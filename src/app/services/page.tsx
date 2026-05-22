@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import ServiceIcon from '@/components/ServiceIcon';
+import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <>
@@ -23,46 +23,58 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Services Grid Section */}
-      <section className="section" style={{ background: '#f0f7ea', padding: '6rem 0' }}>
-        <div className="container">
-          <div className="grid-3">
-            {t.servicesItems.map((item, idx) => (
-              <div key={idx} style={{ 
-                background: '#ffffff', 
-                padding: '2.5rem', 
-                borderRadius: '24px', 
-                boxShadow: '0 15px 40px rgba(146, 194, 110, 0.08)',
-                display: 'flex', 
-                flexDirection: 'column',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                border: '1px solid rgba(146, 194, 110, 0.15)'
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-8px)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 20px 50px rgba(146,194,110,0.15)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 15px 40px rgba(146,194,110,0.08)'; }}
-              >
-                <div style={{ 
-                  background: '#92c26e', 
-                  color: '#000000', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '16px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  marginBottom: '1.5rem',
-                  fontSize: '1.8rem'
-                }}>
-                  <ServiceIcon index={idx} />
+      {/* Our Services Section */}
+      <section className="section" style={{ background: '#ffffff', padding: '6rem 0 4rem 0' }}>
+        <div style={{ width: '100%' }}>
+          <ScrollReveal animation="fade-up">
+          <div style={{ textAlign: 'center', marginBottom: '6rem', padding: '0 2rem' }}>
+            <h2 className="text-gradient" style={{ fontSize: '2.8rem', fontWeight: '800', lineHeight: '1.2', marginBottom: '0' }}>{t.servicesTitle}</h2>
+            <div style={{ width: '80px', height: '4px', background: '#92c26e', borderRadius: '2px', margin: '1.5rem auto 1.5rem auto' }} />
+          </div>
+          </ScrollReveal>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8rem', paddingBottom: '4rem', width: '96%', maxWidth: '1800px', margin: '0 auto' }}>
+            {t.servicesItems.map((item, idx) => {
+              const serviceImages = [
+                '/Our Services/water_resources_management.png',
+                '/Our Services/smart_agriculture.png',
+                '/Our Services/geospatial_survey.png',
+                '/Our Services/project_development_saudi.png',
+                '/Our Services/supply_chains.png',
+              ];
+
+              const isEven = idx % 2 === 0;
+
+              return (
+                <ScrollReveal key={idx} animation={isEven ? 'fade-right' : 'fade-left'}>
+                <div className={`service-zigzag-card ${isEven ? 'even' : 'odd'}`}>
+                  <div className="service-zigzag-img">
+                    <img
+                      src={serviceImages[idx]}
+                      alt={item.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                  <div className="service-zigzag-content">
+                    <span style={{ color: '#c29d59', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1rem' }}>
+                      {lang === 'ar' ? 'خدمة رئيسية' : 'OUR SERVICE'}
+                    </span>
+                    <h3 style={{ color: '#1a4a1a', fontSize: '1.8rem', fontWeight: '800', marginBottom: '1.2rem', lineHeight: '1.3', textTransform: 'uppercase' }}>
+                      {item.title}
+                    </h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.8', margin: '0 0 2rem 0' }}>
+                      {item.desc}
+                    </p>
+                    <div>
+                      <button style={{ background: '#1a1a1a', color: '#ffffff', border: 'none', padding: '0.8rem 2rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '1px', cursor: 'pointer', textTransform: 'uppercase' }}>
+                        {lang === 'ar' ? 'اقرأ المزيد' : 'LEARN MORE'}
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: '700', color: '#1a4a1a' }}>
-                  {item.title}
-                </h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7', margin: 0, flexGrow: 1 }}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -316,8 +316,43 @@ export default function Home() {
 
 
       {/* Why Choose Us — Accordion Section */}
-      <section className="section" style={{ background: '#1a4a1a', padding: '6rem 0' }}>
-        <div className="container">
+      <section className="section" style={{ background: '#1a4a1a', padding: '6rem 0', position: 'relative', overflow: 'hidden' }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, rgba(26,74,26,0.96) 0%, rgba(26,74,26,0.88) 100%)',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '3%',
+            width: '360px',
+            height: '360px',
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'transparent',
+            boxShadow: 'none',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        >
+          <img
+            src="/logo/icon.png"
+            alt=""
+            aria-hidden="true"
+            style={{ width: '78%', height: '78%', objectFit: 'contain', opacity: 0.8 }}
+          />
+        </div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="grid-2" style={{ gap: '4rem', alignItems: 'flex-start' }}>
             {/* Left: Title */}
             <div>
