@@ -5,11 +5,7 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import MethodologyModal from '@/components/MethodologyModal';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ScrollReveal';
-
-import ServiceIcon from '@/components/ServiceIcon';
-import { VisionIcon, MissionIcon } from '@/components/AboutIcons';
-
-export default function Home() {
+        v.play().catch(() => {});
   const { t, lang } = useLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
@@ -668,7 +664,8 @@ function VideoSequence() {
         ref={videoRef}
         autoPlay
         muted
-        preload="metadata"
+        preload={phase === 0 ? 'auto' : 'metadata'}
+        poster="/logo/logo.png"
         playsInline
         onEnded={() => {
           // advance to next video in sequence
@@ -684,6 +681,8 @@ function VideoSequence() {
           height: '100%',
           objectFit: 'cover',
           zIndex: 0,
+          willChange: 'opacity, transform',
+          transform: 'translateZ(0)'
         }}
         // `src` is set programmatically in useEffect to avoid aggressive preloading
       />
