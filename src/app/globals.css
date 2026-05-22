@@ -612,6 +612,14 @@ textarea.form-control {
 .header-cta {
   padding: 0.5rem 1.5rem;
   font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-cta:hover {
+  color: #ffffff;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
@@ -630,6 +638,10 @@ textarea.form-control {
   .header-cta {
     padding: 0.4rem 0.8rem;
     font-size: 0.75rem;
+  }
+
+  .header-cta:hover {
+    color: #ffffff;
   }
 }
 
