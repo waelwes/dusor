@@ -588,6 +588,7 @@ function VideoSequence() {
         v.src = newSrc;
         v.load();
         v.play().catch(() => {});
+      }
     } catch (e) {
       // ignore play/load errors
     }
