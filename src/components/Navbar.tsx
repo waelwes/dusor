@@ -128,7 +128,7 @@ export default function Navbar() {
           <li><Link href="/contact" className={isActive('/contact')} onClick={() => setMenuOpen(false)}>{t.contact}</Link></li>
           <li style={{ borderBottom: '1px solid rgba(146, 194, 110, 0.1)' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.9rem 0' }}>
-              <button onClick={() => setLangDropdownOpen(!langDropdownOpen)} style={{ background: 'transparent', border: 'none', color: scrolled ? 'var(--text-main)' : '#ffffff', fontSize: '1rem', fontWeight: '600', cursor: 'pointer', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', textAlign: lang === 'ar' ? 'right' : 'left', fontFamily: 'inherit' }}>
+              <button onClick={() => setLangDropdownOpen(!langDropdownOpen)} style={{ background: 'transparent', border: 'none', color: 'var(--text-main)', fontSize: '1rem', fontWeight: '600', cursor: 'pointer', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', textAlign: lang === 'ar' ? 'right' : 'left', fontFamily: 'inherit' }}>
                 {lang === 'ar' ? 'العربية' : 'English'}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform 0.3s', transform: langDropdownOpen ? 'rotate(180deg)' : 'none' }}>
                   <polyline points="6 9 12 15 18 9"></polyline>
