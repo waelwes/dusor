@@ -607,12 +607,12 @@ function VideoSequence() {
     } catch (e) {
       // ignore play/load errors
     }
-    // lightweight preloader for the next video (load metadata only)
+      // lightweight preloader for the next video (metadata only to avoid competing for bandwidth)
     try {
       const nextIndex = (phase + 1) % sources.length;
       // create a hidden preloader video to encourage buffering of the next clip
       const pre = document.createElement('video');
-      pre.preload = 'auto';
+      pre.preload = 'metadata';
       pre.muted = true;
       pre.playsInline = true;
       pre.src = sources[nextIndex];
@@ -676,8 +676,7 @@ function VideoSequence() {
         ref={videoRef}
         autoPlay
         muted
-        preload={phase === 0 ? 'auto' : 'metadata'}
-        poster="/logo/logo.png"
+        preload="metadata"
         playsInline
         onEnded={() => {
           // advance to next video in sequence
@@ -694,7 +693,8 @@ function VideoSequence() {
           objectFit: 'cover',
           zIndex: 0,
           willChange: 'opacity, transform',
-          transform: 'translateZ(0)'
+          transform: 'translateZ(0)',
+          backgroundColor: '#0b0f0b',
         }}
         // `src` is set programmatically in useEffect to avoid aggressive preloading
       />
