@@ -191,16 +191,28 @@ html[dir='rtl'] .section-decorator {
   left: 0;
   width: 100%;
   z-index: 100;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  border-bottom: none;
   padding: 1rem 0;
   box-shadow: none;
+  transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease, padding 220ms ease;
+}
+
+.navbar.scrolled {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  padding: 0.6rem 0; /* slightly tighter when sticky */
 }
 
 .navbar .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: none;
+  padding: 0 4%;
+  direction: ltr;
 }
 
 .nav-links {
@@ -212,6 +224,11 @@ html[dir='rtl'] .section-decorator {
 .nav-links a {
   font-weight: 500;
   position: relative;
+  color: #ffffff; /* visible over hero video */
+}
+
+.navbar.scrolled .nav-links a {
+  color: var(--text-main);
 }
 
 .nav-links a::after {
@@ -250,6 +267,14 @@ html[dir='rtl'] .nav-links a::after {
   border: none;
   cursor: pointer;
   padding: 0.3rem;
+}
+
+.hamburger-btn span {
+  background: #ffffff;
+}
+
+.navbar.scrolled .hamburger-btn span {
+  background: var(--text-main);
 }
 
 /* Mobile menu backdrop overlay */

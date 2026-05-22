@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import MethodologyModal from '@/components/MethodologyModal';
 import Link from 'next/link';
@@ -18,23 +18,7 @@ export default function Home() {
     <>
       <section className="hero hero-video-section" style={{ minHeight: '100vh', padding: '0', display: 'flex', alignItems: 'flex-end', position: 'relative', overflow: 'hidden' }}>
         {/* Video Background */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0,
-          }}
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+        <VideoSequence />
 
         {/* Dark overlay — stronger at bottom for text readability */}
         <div style={{
@@ -66,11 +50,11 @@ export default function Home() {
           </ScrollReveal>
         </div>
 
-        {/* Scroll indicator */}
-        <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-          <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)', animation: 'scroll-line 1.5s ease-in-out infinite' }} />
-        </div>
+        {/* scroll indicator removed */}
       </section>
+
+      {/* Video sequence component defined below to play satellite then hero */}
+
 
       {/* Brand Green Highlight Banner - 2 Column Split Layout */}
       <section style={{ background: '#92c26e', color: '#000000', padding: '4.5rem 0', borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
@@ -327,12 +311,12 @@ export default function Home() {
             zIndex: 0,
           }}
         />
-        <div
+          <div
           aria-hidden="true"
           style={{
             position: 'absolute',
-            top: '50%',
-            right: '3%',
+            top: '90%',
+            right: '0.5%',
             width: '360px',
             height: '360px',
             transform: 'translateY(-50%)',
@@ -349,7 +333,7 @@ export default function Home() {
             src="/logo/icon.png"
             alt=""
             aria-hidden="true"
-            style={{ width: '78%', height: '78%', objectFit: 'contain', opacity: 0.8 }}
+            style={{ width: '78%', height: '78%', objectFit: 'contain', opacity: 0.08 }}
           />
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -362,8 +346,8 @@ export default function Home() {
               <div style={{ width: '80px', height: '4px', background: '#92c26e', borderRadius: '2px', marginBottom: '1.5rem', marginLeft: lang === 'ar' ? 'auto' : '0', marginRight: lang === 'ar' ? '0' : 'auto', marginTop: '1rem' }} />
               <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', lineHeight: '1.7', fontWeight: '500' }}>
                 {lang === 'ar'
-                  ? 'نقدم حلولاً متكاملة تجمع بين الخبرة الوطنية والتقنيات الحديثة لتحقيق أهداف التنمية المستدامة.'
-                  : 'We deliver integrated solutions combining national expertise with cutting-edge technology to drive sustainable development.'}
+                  ? 'نقدم حلولاً متكاملة تجمع بين الخبرة الوطنية والتقنيات الحديثة لتحقيق أهداف التنمية المستدامة، بدءًا من التحليل الاستراتيجي والنمذجة الرقمية وصولاً إلى التنفيذ الميداني والمراقبة لضمان استدامة الموارد وتحقيق أثر اقتصادي واجتماعي ملموس. نوفر دراسات جدوى وتصاميم تنفيذية، ندمج أنظمة إنترنت الأشياء والذكاء الاصطناعي للمراقبة والتحكم، ونعمل على تحسين سلاسل الإمداد لتقليل الهدر وزيادة الكفاءة. كما نوفّر خدمات ما بعد التنفيذ من متابعة ميدانية، تقييم أثر بيئي واجتماعي، وتدريب الفرق المحلية لنقل المعرفة والتشغيل المستدام.'
+                  : 'We deliver integrated solutions combining national expertise with cutting-edge technology to drive sustainable development, from strategic analysis and digital modeling to field implementation and monitoring that ensure resource sustainability and measurable economic and social impact. We provide feasibility studies and detailed execution designs, integrate IoT and AI systems for monitoring and control, optimize supply chains to reduce waste and increase efficiency, and offer post-delivery services including field follow-up, environmental and social impact assessments, and local team training to transfer knowledge and ensure sustainable operations.'}
               </p>
             </div>
 
@@ -582,6 +566,152 @@ export default function Home() {
       </section>
 
       <MethodologyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
+  );
+}
+
+function VideoSequence() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [phase, setPhase] = useState<number>(0); // 0: hero, 1: satellite
+  const [durations, setDurations] = useState<number[]>([0, 0, 0]);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const pendingSeek = useRef<number | null>(null);
+
+  const sources = ['/hero-video.mp4', '/satellite.mp4', '/farming.mp4'];
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const newSrc = sources[phase] || sources[0];
+    // do not auto-loop; control switching explicitly
+    v.loop = false;
+    // if src changed, set it, load and play to guarantee switch
+    try {
+      const currentHas = v.currentSrc ? v.currentSrc.includes(newSrc) : false;
+      if (!currentHas) {
+        v.pause();
+        v.src = newSrc;
+        v.load();
+      }
+      v.play().catch(() => {});
+    } catch (e) {
+      // ignore play/load errors
+    }
+    // lightweight preloader for the next video (load metadata only)
+    try {
+      const nextIndex = (phase + 1) % sources.length;
+      const pre = document.createElement('video');
+      pre.preload = 'metadata';
+      pre.src = sources[nextIndex];
+      // allow browser to fetch metadata in background
+    } catch (e) {
+      // ignore
+    }
+  }, [phase]);
+
+  const handleLoadedMetadata = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    const d = isFinite(v.duration) ? v.duration : 0;
+    setDurations(prev => {
+      const next = [...prev];
+      next[phase] = d;
+      return next;
+    });
+    if (pendingSeek.current != null && d > 0) {
+      v.currentTime = pendingSeek.current * d;
+      pendingSeek.current = null;
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    setCurrentTime(v.currentTime || 0);
+  };
+
+  const bars = [
+    { id: 0, label: 'hero' },
+    { id: 1, label: 'satellite' },
+    { id: 2, label: 'farming' },
+  ];
+
+  const onBarClick = (e: React.MouseEvent, i: number) => {
+    const el = e.currentTarget as HTMLDivElement;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const ratio = Math.min(Math.max(x / rect.width, 0), 1);
+    if (i !== phase) {
+      // switch phase and seek when metadata loads
+      pendingSeek.current = ratio;
+      setPhase(i);
+    } else {
+      const v = videoRef.current;
+      const d = durations[i] || (v ? v.duration : 0) || 0;
+      if (v && d > 0) v.currentTime = ratio * d;
+    }
+  };
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        preload="metadata"
+        playsInline
+        onEnded={() => {
+          // advance to next video in sequence
+          setPhase((p) => (p + 1) % sources.length);
+        }}
+        onLoadedMetadata={handleLoadedMetadata}
+        onTimeUpdate={handleTimeUpdate}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: 0,
+        }}
+        // `src` is set programmatically in useEffect to avoid aggressive preloading
+      />
+
+
+      {/* Two thin glassy progress bars in one row (clickable) */}
+      <div className="video-bars-container" style={{ position: 'absolute', bottom: '5rem', left: '50%', transform: 'translateX(-50%)', zIndex: 60, width: '86%', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '0.3rem', alignItems: 'flex-start', justifyContent: 'space-between', maxWidth: '1400px' }}>
+        {bars.map((b, i) => {
+          const d = durations[i] || 0;
+          const progress = d > 0 ? (phase > i ? 100 : phase === i ? Math.min(100, (currentTime / d) * 100) : 0) : 0;
+          return (
+            <div key={b.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '4px', flex: '0 0 30%', minWidth: '120px' }}>
+              <div role="button" aria-label={`video-progress-${b.label}`} onClick={(e) => onBarClick(e, i)}
+                style={{ height: '6px', borderRadius: '0px', background: 'rgba(0,0,0,0.22)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', boxShadow: 'none', overflow: 'hidden', cursor: 'pointer', display: 'block' }}>
+                <div style={{ position: 'relative', width: `${progress}%`, transition: 'width 200ms linear', height: '100%', background: 'transparent' }}>
+                  <div style={{ position: 'absolute', inset: 0, background: phase === i ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.06)' }} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <style>{`@keyframes loader-slide { 0% { transform: translateX(-100%); } 50% { transform: translateX(20%); } 100% { transform: translateX(120%); } } @keyframes scroll-line-horizontal { 0% { transform: translateX(-100%); } 50% { transform: translateX(10%); } 100% { transform: translateX(120%); } }
+        /* Mobile: move bars down slightly */
+        @media (max-width: 600px) {
+          .video-bars-container { bottom: 2rem !important; gap: 0.15rem !important; width: 94% !important; }
+          .video-bars-container > div { gap: 3px !important; min-width: 90px !important; flex: 0 0 30% !important; }
+          .video-bars-container [aria-label^="video-progress-"] { height: 6px !important; }
+        }
+        /* Desktop: make the progress lines thinner and reduce gaps */
+        @media (min-width: 900px) {
+          .video-bars-container { width: 70% !important; justify-content: center !important; gap: 1rem !important; }
+          .video-bars-container > div { flex: 0 0 30% !important; min-width: 100px !important; max-width: 34% !important; }
+          .video-bars-container [aria-label^="video-progress-"] { height: 4px !important; }
+          .video-bars-container [aria-label^="video-progress-"] > div { height: 100% !important; }
+        }
+      `}</style>
     </>
   );
 }
