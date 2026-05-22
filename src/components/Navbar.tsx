@@ -11,18 +11,20 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isHomePage = pathname === '/';
+  const isStickyHeader = scrolled || !isHomePage;
 
   const isActive = (path: string) => pathname === path ? 'active' : '';
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 40 || !isHomePage);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isHomePage]);
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isStickyHeader ? 'scrolled' : ''}`}>
       <div className="container">
         <Link href="/" className="logo">
           <img 
@@ -52,7 +54,7 @@ export default function Navbar() {
           <div className="desktop-only" style={{ position: 'relative' }}>
             <button 
               onClick={() => setLangDropdownOpen(!langDropdownOpen)} 
-              style={{ background: 'transparent', border: 'none', color: scrolled ? 'var(--text-main)' : '#ffffff', fontSize: '1rem', fontWeight: '500', cursor: 'pointer', padding: '0', display: 'flex', alignItems: 'center', gap: '0.3rem', fontFamily: 'inherit' }}
+              style={{ background: 'transparent', border: 'none', color: isStickyHeader ? 'var(--text-main)' : '#ffffff', fontSize: '1rem', fontWeight: '500', cursor: 'pointer', padding: '0', display: 'flex', alignItems: 'center', gap: '0.3rem', fontFamily: 'inherit' }}
             >
               {lang === 'ar' ? 'العربية' : 'English'}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform 0.3s', transform: langDropdownOpen ? 'rotate(180deg)' : 'none' }}>
@@ -82,8 +84,8 @@ export default function Navbar() {
             className="btn btn-outline header-cta"
             style={{
               borderRadius: '50px',
-              color: scrolled ? 'var(--primary-color)' : '#ffffff',
-              borderColor: scrolled ? 'var(--primary-color)' : '#ffffff',
+              color: isStickyHeader ? 'var(--primary-color)' : '#ffffff',
+              borderColor: isStickyHeader ? 'var(--primary-color)' : '#ffffff',
             }}
           >
             {lang === 'ar' ? 'تواصل معنا' : 'Get in Touch'}
@@ -95,9 +97,9 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span style={{ display: 'block', width: '22px', height: '2px', background: scrolled ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', transition: 'all 0.3s', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
-            <span style={{ display: 'block', width: '22px', height: '2px', background: scrolled ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', margin: '5px 0', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: '22px', height: '2px', background: scrolled ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', transition: 'all 0.3s', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
+            <span style={{ display: 'block', width: '22px', height: '2px', background: isStickyHeader ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', transition: 'all 0.3s', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
+            <span style={{ display: 'block', width: '22px', height: '2px', background: isStickyHeader ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', margin: '5px 0', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+            <span style={{ display: 'block', width: '22px', height: '2px', background: isStickyHeader ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', transition: 'all 0.3s', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
           </button>
         </div>
       </div>
