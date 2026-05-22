@@ -608,7 +608,23 @@ function VideoSequence() {
     } catch (e) {
       // ignore play/load errors
     }
-      // removed persistent preloader to save bandwidth
+    try {
+      const nextIndex = (phase + 1) % sources.length;
+      if (!preloadRef.current) {
+        const pre = document.createElement('video');
+        pre.preload = 'auto';
+        pre.muted = true;
+        pre.playsInline = true;
+        pre.style.display = 'none';
+        document.body.appendChild(pre);
+        preloadRef.current = pre;
+      }
+      preloadRef.current.preload = 'auto';
+      preloadRef.current.src = sources[nextIndex];
+      preloadRef.current.load();
+    } catch (e) {
+      // ignore
+    }
   }, [phase]);
 
   const handleLoadedMetadata = () => {
