@@ -567,9 +567,7 @@ export default function Home() {
 }
 
 function VideoSequence() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const preloadRef = useRef<HTMLVideoElement | null>(null);
-  const [phase, setPhase] = useState<number>(0); // 0: hero, 1: satellite
+  const [phase, setPhase] = useState<number>(0); // 0: hero, 1: satellite, 2: farming
   const sources = [
     '/hero-video.mp4',
     '/satellite.mp4',
@@ -578,69 +576,41 @@ function VideoSequence() {
   const [durations, setDurations] = useState<number[]>([0, 0, 0]);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const pendingSeek = useRef<number | null>(null);
-
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const newSrc = sources[phase] || sources[0];
-    // do not auto-loop; control switching explicitly
-    v.loop = false;
-    // if src changed, set it, load and play to guarantee switch
-    try {
-      const currentHas = v.currentSrc ? v.currentSrc.includes(newSrc) : false;
-      if (!currentHas) {
-        v.pause();
-        const hadSrc = !!v.currentSrc;
-        // if switching from an already-playing source, remove poster
-        if (hadSrc) {
-          try { v.removeAttribute('poster'); } catch (e) {}
+    // Play the current phase video, pause the others
+    sources.forEach((_, i) => {
+      const v = videoRefs.current[i];
+      if (v) {
+        if (i === phase) {
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+          v.currentTime = 0; // Reset video to start when inactive
         }
-        v.src = newSrc;
-        v.load();
-        v.play().catch(() => {});
       }
-    } catch (e) {
-      // ignore play/load errors
-    }
-    try {
-      const nextIndex = (phase + 1) % sources.length;
-      if (!preloadRef.current) {
-        const pre = document.createElement('video');
-        pre.preload = 'auto';
-        pre.muted = true;
-        pre.playsInline = true;
-        pre.style.display = 'none';
-        document.body.appendChild(pre);
-        preloadRef.current = pre;
-      }
-      preloadRef.current.preload = 'auto';
-      preloadRef.current.src = sources[nextIndex];
-      preloadRef.current.load();
-    } catch (e) {
-      // ignore
-    }
+    });
   }, [phase]);
 
-  const handleLoadedMetadata = () => {
-    const v = videoRef.current;
-    if (!v) return;
+  const handleLoadedMetadata = (i: number, e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const v = e.target as HTMLVideoElement;
     const d = isFinite(v.duration) ? v.duration : 0;
     setDurations(prev => {
       const next = [...prev];
-      next[phase] = d;
+      next[i] = d;
       return next;
     });
-    if (pendingSeek.current != null && d > 0) {
+    if (i === phase && pendingSeek.current != null && d > 0) {
       v.currentTime = pendingSeek.current * d;
       pendingSeek.current = null;
     }
   };
 
-  const handleTimeUpdate = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    setCurrentTime(v.currentTime || 0);
+  const handleTimeUpdate = (i: number, e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    if (i === phase) {
+      setCurrentTime((e.target as HTMLVideoElement).currentTime || 0);
+    }
   };
 
   const bars = [
@@ -652,14 +622,13 @@ function VideoSequence() {
   const onBarClick = (e: React.MouseEvent, i: number) => {
     const el = e.currentTarget as HTMLDivElement;
     const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const ratio = Math.min(Math.max(x / rect.width, 0), 1);
+    const ratio = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+    
     if (i !== phase) {
-      // switch phase and seek when metadata loads
       pendingSeek.current = ratio;
       setPhase(i);
     } else {
-      const v = videoRef.current;
+      const v = videoRefs.current[i];
       const d = durations[i] || (v ? v.duration : 0) || 0;
       if (v && d > 0) v.currentTime = ratio * d;
     }
@@ -667,32 +636,37 @@ function VideoSequence() {
 
   return (
     <>
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        preload="metadata"
-        playsInline
-        onEnded={() => {
-          // advance to next video in sequence
-          setPhase((p) => (p + 1) % sources.length);
-        }}
-        onLoadedMetadata={handleLoadedMetadata}
-        onTimeUpdate={handleTimeUpdate}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 0,
-          willChange: 'opacity, transform',
-          transform: 'translateZ(0)',
-          backgroundColor: '#0b0f0b',
-        }}
-        // `src` is set programmatically in useEffect to avoid aggressive preloading
-      />
+      {sources.map((src, i) => (
+        <video
+          key={src}
+          ref={(el) => { videoRefs.current[i] = el; }}
+          src={src}
+          autoPlay={i === 0}
+          muted
+          playsInline
+          preload="auto"
+          onEnded={() => {
+            if (i === phase) {
+              setPhase((p) => (p + 1) % sources.length);
+            }
+          }}
+          onLoadedMetadata={(e) => handleLoadedMetadata(i, e)}
+          onTimeUpdate={(e) => handleTimeUpdate(i, e)}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: i === phase ? 1 : 0,
+            opacity: i === phase ? 1 : 0,
+            transition: 'opacity 600ms ease', // Smooth crossfade!
+            willChange: 'opacity',
+            backgroundColor: '#0b0f0b',
+          }}
+        />
+      ))}
 
 
       {/* Two thin glassy progress bars in one row (clickable) */}
