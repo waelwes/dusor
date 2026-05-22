@@ -608,25 +608,7 @@ function VideoSequence() {
     } catch (e) {
       // ignore play/load errors
     }
-      // persistent preloader for the next video so the browser can cache the clip before switching
-    try {
-      const nextIndex = (phase + 1) % sources.length;
-        if (!preloadRef.current) {
-          const pre = document.createElement('video');
-          pre.preload = 'auto';
-          pre.muted = true;
-          pre.playsInline = true;
-          pre.style.display = 'none';
-          document.body.appendChild(pre);
-          preloadRef.current = pre;
-        }
-
-        preloadRef.current.preload = 'auto';
-        preloadRef.current.src = sources[nextIndex];
-        preloadRef.current.load();
-    } catch (e) {
-      // ignore
-    }
+      // removed persistent preloader to save bandwidth
   }, [phase]);
 
   const handleLoadedMetadata = () => {
@@ -678,7 +660,7 @@ function VideoSequence() {
         ref={videoRef}
         autoPlay
         muted
-        preload="auto"
+        preload="metadata"
         playsInline
         onEnded={() => {
           // advance to next video in sequence
