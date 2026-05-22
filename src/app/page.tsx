@@ -5,7 +5,7 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import MethodologyModal from '@/components/MethodologyModal';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ScrollReveal';
-        v.play().catch(() => {});
+export default function Home() {
   const { t, lang } = useLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
