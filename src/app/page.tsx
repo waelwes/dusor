@@ -577,7 +577,7 @@ function VideoSequence() {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const pendingSeek = useRef<number | null>(null);
 
-  const sources = ['/hero-video.mp4', '/satellite.mp4', '/farming.mp4'];
+        preload={phase === 0 ? 'auto' : 'metadata'}
 
   useEffect(() => {
     const v = videoRef.current;
@@ -592,18 +592,29 @@ function VideoSequence() {
         v.pause();
         v.src = newSrc;
         v.load();
-      }
+          zIndex: 0,
+          willChange: 'opacity, transform',
+          transform: 'translateZ(0)',
       v.play().catch(() => {});
+        poster="/logo/logo.png"
     } catch (e) {
       // ignore play/load errors
     }
     // lightweight preloader for the next video (load metadata only)
     try {
       const nextIndex = (phase + 1) % sources.length;
+      // create a hidden preloader video to encourage buffering of the next clip
       const pre = document.createElement('video');
-      pre.preload = 'metadata';
+      pre.preload = 'auto';
+      pre.muted = true;
+      pre.playsInline = true;
       pre.src = sources[nextIndex];
-      // allow browser to fetch metadata in background
+      pre.style.display = 'none';
+      document.body.appendChild(pre);
+      // remove preloader after metadata loaded or after 10s to avoid memory hold
+      const cleanup = () => { try { pre.remove(); } catch(e) {} };
+      pre.addEventListener('loadedmetadata', cleanup, { once: true });
+      setTimeout(cleanup, 10000);
     } catch (e) {
       // ignore
     }
