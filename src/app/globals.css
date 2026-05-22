@@ -1,0 +1,795 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Outfit:wght@300;400;500;700&display=swap');
+
+:root {
+  --primary-color: #000000; /* Deep black from logo */
+  --secondary-color: #92c26e; /* Brand green from logo */
+  --accent-color: #6f9c4c; /* Darker accent green */
+  --bg-color: #ffffff; /* Pure clean white */
+  --surface-color: #ffffff; /* Solid white surface */
+  --text-main: #0d0f0c; /* High contrast dark green-black for readability */
+  --text-muted: #556660; /* Darker sage gray for secondary text */
+  --glass-border: rgba(146, 194, 110, 0.25); /* Tinted border with brand green */
+  --font-ar: 'Tajawal', sans-serif;
+  --font-en: 'Outfit', sans-serif;
+}
+
+/* =============================================
+   SCROLL REVEAL ANIMATIONS (NEOM-style)
+   ============================================= */
+
+.sr-base {
+  will-change: opacity, transform;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Initial states — invisible */
+.sr-fade-up    { opacity: 0; transform: translateY(50px); }
+.sr-fade-left  { opacity: 0; transform: translateX(60px); }
+.sr-fade-right { opacity: 0; transform: translateX(-60px); }
+.sr-fade-in    { opacity: 0; transform: none; }
+.sr-scale-up   { opacity: 0; transform: scale(0.92); }
+
+/* Visible state — triggered by IntersectionObserver */
+.sr-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* On mobile: disable horizontal animations to prevent side gaps */
+@media (max-width: 768px) {
+  .sr-fade-left,
+  .sr-fade-right {
+    transform: translateY(30px);
+  }
+}
+
+/* Smooth page scroll */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-en);
+  overflow-x: hidden;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+html[dir='rtl'] body {
+  font-family: var(--font-ar);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #2d6a1f, #1a4a10);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Layout Classes */
+.container {
+  width: 100%;
+  /* slightly wider content but reduced horizontal gutters for nicer fit */
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.section-decorator {
+  width: 80px;
+  height: 6px;
+  background: var(--secondary-color);
+  margin-top: 1rem;
+}
+
+.section-decorator.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html[dir='ltr'] .section-decorator {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+}
+
+html[dir='rtl'] .section-decorator {
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: var(--surface-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(146, 194, 110, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(146, 194, 110, 0.12);
+  border-color: var(--secondary-color);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), #222222);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(146, 194, 110, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  box-shadow: none;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+html[dir='rtl'] .nav-links a::after {
+  left: auto;
+  right: 0;
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+  width: 100%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+/* Mobile menu backdrop overlay */
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile dropdown menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  max-width: 80vw;
+  height: 100vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+  padding-top: 1.5rem;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+html[dir='rtl'] .mobile-menu {
+  right: auto;
+  left: -100%;
+  box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[dir='rtl'] .mobile-menu.open {
+  left: 0;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-menu ul li {
+  border-bottom: 1px solid rgba(146, 194, 110, 0.1);
+}
+
+.mobile-menu ul li:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  padding: 0.9rem 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-main);
+  transition: color 0.2s;
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a.active {
+  color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu,
+  .mobile-backdrop {
+    display: block;
+  }
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+@keyframes scroll-line {
+  0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+}
+
+/* On mobile: image above text */
+@media (max-width: 768px) {
+  .hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .hero-img-col {
+    order: 1 !important;
+  }
+  .hero-text-col {
+    order: 2 !important;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.hero-bg {
+  display: none;
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .hero-image-col {
+    order: -1;
+  }
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.2rem;
+}
+
+@media (max-width: 1200px) {
+  .grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .grid-5 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tech-showcase-card:hover {
+  transform: translateY(-8px);
+  border-color: #92c26e !important;
+  box-shadow: 0 15px 35px rgba(146, 194, 110, 0.25) !important;
+}
+
+.tech-showcase-card img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.tech-showcase-card:hover img {
+  transform: scale(1.08);
+}/* Features/Services Cards */
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: rgba(146, 194, 110, 0.1);
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 15, 12, 0.4); /* Elegant, lighter soft dimming for light mode */
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: #ffffff;
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 50px rgba(13, 15, 12, 0.1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+html[dir='rtl'] .modal-close {
+  right: auto;
+  left: 1rem;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+
+.form-control {
+  width: 100%;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(146, 194, 110, 0.4);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(146, 194, 110, 0.2);
+}
+
+textarea.form-control {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--glass-border);
+  padding: 3rem 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+.header-actions {
+  gap: 2.5rem;
+}
+
+.header-cta {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .nav-links {
+    display: none; /* In a real app we'd add a hamburger menu */
+  }
+  .desktop-only {
+    display: none !important;
+  }
+  .header-actions {
+    gap: 1.2rem;
+  }
+  .header-cta {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Reduce horizontal container padding on smaller screens so text fits better */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Quick Contact: stack text above form on mobile */
+@media (max-width: 768px) {
+  .quick-contact-grid {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: stretch !important;
+  }
+  .quick-contact-grid > div {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .quick-contact-grid .text-gradient {
+    text-align: start;
+  }
+  /* Ensure form has full-width and consistent padding on mobile */
+  .quick-contact-grid form {
+    width: 100%;
+  }
+}
+
+/* Services hero: direction-aware alignment on mobile */
+@media (max-width: 768px) {
+  html[dir='rtl'] .services-hero-text {
+    text-align: right;
+  }
+  html[dir='ltr'] .services-hero-text {
+    text-align: left;
+  }
+}
+
+/* Social Icons in Footer */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-icon:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* Floating Contact Button */
+.floating-contact {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.floating-contact-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-contact-inner:hover {
+  background: var(--secondary-color);
+  color: #000000;
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 35px rgba(146, 194, 110, 0.4);
+}
+
+/* Responsive 5-column grid for Technical Sectors & Services */
+.grid-5-responsive {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.6rem;
+  padding: 0 0.6rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-5-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* 5th card alone in row 2 on 3-col — center it */
+  .grid-5-responsive > *:last-child:nth-child(3n - 1) {
+    grid-column: 2 / 3;
+  }
+  .grid-5-responsive > *:last-child:nth-child(3n - 2) {
+    grid-column: 2 / 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-5-responsive {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    padding: 0 0.4rem;
+  }
+  /* Center lone 5th card on 2-col mobile grid */
+  .grid-5-responsive > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
+  }
+}
+
+/* Service Zig Zag Layout */
+.service-zigzag-card {
+  display: flex;
+  width: 100%;
+  min-height: 400px;
+  background: transparent;
+  align-items: center;
+  gap: 12rem;
+}
+
+.service-zigzag-card.even {
+  flex-direction: row;
+}
+
+.service-zigzag-card.odd {
+  flex-direction: row-reverse;
+}
+
+.service-zigzag-img {
+  flex: 1;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  max-height: 500px;
+}
+
+.service-zigzag-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .service-zigzag-card {
+    gap: 3rem;
+  }
+  .service-zigzag-card.even,
+  .service-zigzag-card.odd {
+    flex-direction: column;
+  }
+  .service-zigzag-img,
+  .service-zigzag-content {
+    flex: none;
+    width: 100%;
+  }
+  .service-zigzag-content {
+    padding: 0 1rem;
+    /* keep default centered on very small screens, but override per document direction */
+    text-align: center;
+  }
+  .service-zigzag-content h3 {
+    text-align: center;
+  }
+
+  /* Direction-aware alignment for mobile: RTL -> right, LTR -> left */
+  html[dir='rtl'] .service-zigzag-content {
+    text-align: right;
+  }
+  html[dir='rtl'] .service-zigzag-content h3 {
+    text-align: right;
+  }
+  html[dir='ltr'] .service-zigzag-content {
+    text-align: left;
+  }
+  html[dir='ltr'] .service-zigzag-content h3 {
+    text-align: left;
+  }
+}
