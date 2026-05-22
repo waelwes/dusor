@@ -568,6 +568,7 @@ export default function Home() {
 
 function VideoSequence() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const preloadRef = useRef<HTMLVideoElement | null>(null);
   const [phase, setPhase] = useState<number>(0); // 0: hero, 1: satellite
   const sources = [
     '/hero-video.mp4',
@@ -607,21 +608,22 @@ function VideoSequence() {
     } catch (e) {
       // ignore play/load errors
     }
-      // lightweight preloader for the next video (metadata only to avoid competing for bandwidth)
+      // persistent preloader for the next video so the browser can cache the clip before switching
     try {
       const nextIndex = (phase + 1) % sources.length;
-      // create a hidden preloader video to encourage buffering of the next clip
-      const pre = document.createElement('video');
-      pre.preload = 'metadata';
-      pre.muted = true;
-      pre.playsInline = true;
-      pre.src = sources[nextIndex];
-      pre.style.display = 'none';
-      document.body.appendChild(pre);
-      // remove preloader after metadata loaded or after 10s to avoid memory hold
-      const cleanup = () => { try { pre.remove(); } catch(e) {} };
-      pre.addEventListener('loadedmetadata', cleanup, { once: true });
-      setTimeout(cleanup, 10000);
+        if (!preloadRef.current) {
+          const pre = document.createElement('video');
+          pre.preload = 'auto';
+          pre.muted = true;
+          pre.playsInline = true;
+          pre.style.display = 'none';
+          document.body.appendChild(pre);
+          preloadRef.current = pre;
+        }
+
+        preloadRef.current.preload = 'auto';
+        preloadRef.current.src = sources[nextIndex];
+        preloadRef.current.load();
     } catch (e) {
       // ignore
     }
@@ -676,7 +678,7 @@ function VideoSequence() {
         ref={videoRef}
         autoPlay
         muted
-        preload="metadata"
+        preload="auto"
         playsInline
         onEnded={() => {
           // advance to next video in sequence
