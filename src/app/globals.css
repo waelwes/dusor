@@ -617,9 +617,13 @@ textarea.form-control {
 }
 
 .header-cta:hover {
-  color: #ffffff;
+  color: #ffffff !important;
   background: var(--primary-color);
   border-color: var(--primary-color);
+}
+
+.navbar.scrolled .header-cta:hover {
+  color: #ffffff !important;
 }
 
 @media (max-width: 768px) {
@@ -641,7 +645,7 @@ textarea.form-control {
   }
 
   .header-cta:hover {
-    color: #ffffff;
+    color: #ffffff !important;
   }
 }
 
