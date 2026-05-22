@@ -590,9 +590,19 @@ function VideoSequence() {
       const currentHas = v.currentSrc ? v.currentSrc.includes(newSrc) : false;
       if (!currentHas) {
         v.pause();
+        const hadSrc = !!v.currentSrc;
+        // if switching from an already-playing source, remove poster and fade out
+        if (hadSrc) {
+          try { v.removeAttribute('poster'); } catch (e) {}
+          try { (v.style as any).transition = 'opacity 300ms ease'; (v.style as any).opacity = '0'; } catch (e) {}
+        }
         v.src = newSrc;
         v.load();
-        v.play().catch(() => {});
+        v.play().then(() => {
+          if (hadSrc) try { (v.style as any).opacity = '1'; } catch (e) {}
+        }).catch(() => {
+          if (hadSrc) try { (v.style as any).opacity = '1'; } catch (e) {}
+        });
       }
     } catch (e) {
       // ignore play/load errors
