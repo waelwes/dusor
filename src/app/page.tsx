@@ -587,11 +587,7 @@ function VideoSequence() {
         v.pause();
         v.src = newSrc;
         v.load();
-          zIndex: 0,
-          willChange: 'opacity, transform',
-          transform: 'translateZ(0)',
-      v.play().catch(() => {});
-        poster="/logo/logo.png"
+        v.play().catch(() => {});
     } catch (e) {
       // ignore play/load errors
     }
