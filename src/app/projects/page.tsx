@@ -3,6 +3,7 @@
 import React from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
+import Link from 'next/link';
 
 export default function ProjectsPage() {
   const { lang, t } = useLanguage();
@@ -231,9 +232,9 @@ export default function ProjectsPage() {
                     ? 'مشروع استراتيجي ضخم يهدف إلى تحويل آلاف الهكتارات من الأراضي الصحراوية إلى مزارع ذكية مستدامة باستخدام أحدث تقنيات الري والذكاء الاصطناعي، مما أسهم في توفير 40% من استهلاك المياه.' 
                     : 'A massive strategic project aimed at transforming thousands of hectares of desert land into sustainable smart farms using the latest irrigation technologies and AI, saving 40% of water consumption.'}
                 </p>
-                <button className="btn btn-primary" style={{ alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', borderRadius: '50px', padding: '1rem 2.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', cursor: 'pointer' }}>
+                <Link href="/services" className="btn btn-primary" style={{ display: 'inline-block', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', borderRadius: '50px', padding: '1rem 2.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', cursor: 'pointer', textDecoration: 'none' }}>
                   {lang === 'ar' ? 'عرض دراسة الحالة' : 'View Case Study'}
-                </button>
+                </Link>
               </ScrollReveal>
             </div>
           </div>

@@ -246,9 +246,9 @@ export default function Home() {
                       {item.desc}
                     </p>
                     <div>
-                      <button style={{ background: '#1a1a1a', color: '#ffffff', border: 'none', padding: '0.8rem 2rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '1px', cursor: 'pointer', textTransform: 'uppercase' }}>
+                      <Link href="/services" style={{ display: 'inline-block', background: '#1a1a1a', color: '#ffffff', border: 'none', padding: '0.8rem 2rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '1px', cursor: 'pointer', textTransform: 'uppercase', textDecoration: 'none' }}>
                         {lang === 'ar' ? 'اقرأ المزيد' : 'LEARN MORE'}
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

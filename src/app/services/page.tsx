@@ -3,6 +3,7 @@
 import React from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
+import Link from 'next/link';
 
 export default function Services() {
   const { t, lang } = useLanguage();
@@ -71,9 +72,9 @@ export default function Services() {
                       {item.desc}
                     </p>
                     <div>
-                      <button style={{ background: '#1a1a1a', color: '#ffffff', border: 'none', padding: '0.8rem 2rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '1px', cursor: 'pointer', textTransform: 'uppercase' }}>
+                      <Link href="/projects" style={{ display: 'inline-block', background: '#1a1a1a', color: '#ffffff', border: 'none', padding: '0.8rem 2rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '1px', cursor: 'pointer', textTransform: 'uppercase', textDecoration: 'none' }}>
                         {lang === 'ar' ? 'اقرأ المزيد' : 'LEARN MORE'}
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

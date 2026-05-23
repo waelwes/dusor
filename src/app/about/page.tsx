@@ -4,6 +4,7 @@ import React from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { VisionIcon, MissionIcon, ValuesIcon, GoalsIcon, ScopeIcon } from '@/components/AboutIcons';
 import ScrollReveal from '@/components/ScrollReveal';
+import Link from 'next/link';
 
 export default function About() {
   const { t, lang } = useLanguage();
@@ -134,9 +135,9 @@ export default function About() {
                   {t.aboutVisionDesc}
                 </p>
                 <div style={{ marginTop: '2.5rem' }}>
-                  <button className="btn btn-primary" style={{ background: '#000000', color: '#ffffff', border: 'none', borderRadius: '50px', padding: '1rem 2.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <Link href="/services" className="btn btn-primary" style={{ display: 'inline-block', background: '#000000', color: '#ffffff', border: 'none', borderRadius: '50px', padding: '1rem 2.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', textDecoration: 'none' }}>
                     {lang === 'ar' ? 'اكتشف المزيد' : 'DISCOVER MORE'}
-                  </button>
+                  </Link>
                 </div>
               </ScrollReveal>
             </div>
@@ -159,9 +160,9 @@ export default function About() {
                   {t.aboutMissionDesc}
                 </p>
                 <div style={{ marginTop: '2.5rem' }}>
-                  <button className="btn btn-primary" style={{ background: '#000000', color: '#ffffff', border: 'none', borderRadius: '50px', padding: '1rem 2.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <Link href="/services" className="btn btn-primary" style={{ display: 'inline-block', background: '#000000', color: '#ffffff', border: 'none', borderRadius: '50px', padding: '1rem 2.5rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', textDecoration: 'none' }}>
                     {lang === 'ar' ? 'اكتشف المزيد' : 'DISCOVER MORE'}
-                  </button>
+                  </Link>
                 </div>
               </ScrollReveal>
             </div>
@@ -267,9 +268,9 @@ export default function About() {
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', fontWeight: '300' }}>
                   {lang === 'ar' ? 'حلول الذكاء الاصطناعي وأنظمة الري المتقدمة.' : 'AI solutions and advanced irrigation systems.'}
                 </p>
-                <button style={{ marginTop: 'auto', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px' }}>
+                <Link href="/services" style={{ marginTop: 'auto', display: 'inline-block', textAlign: 'center', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px', textDecoration: 'none' }}>
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Explore'}
-                </button>
+                </Link>
               </div>
             </ScrollReveal>
 
@@ -283,9 +284,9 @@ export default function About() {
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', fontWeight: '300' }}>
                   {lang === 'ar' ? 'الاستكشاف والتحليل لتحقيق الاستدامة.' : 'Exploration and analysis for sustainability.'}
                 </p>
-                <button style={{ marginTop: 'auto', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px' }}>
+                <Link href="/services" style={{ marginTop: 'auto', display: 'inline-block', textAlign: 'center', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px', textDecoration: 'none' }}>
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Explore'}
-                </button>
+                </Link>
               </div>
             </ScrollReveal>
 
@@ -299,9 +300,9 @@ export default function About() {
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', fontWeight: '300' }}>
                   {lang === 'ar' ? 'أدوات مسح واستشعار دقيقة وموثوقة.' : 'Accurate and reliable surveying tools.'}
                 </p>
-                <button style={{ marginTop: 'auto', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px' }}>
+                <Link href="/services" style={{ marginTop: 'auto', display: 'inline-block', textAlign: 'center', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px', textDecoration: 'none' }}>
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Explore'}
-                </button>
+                </Link>
               </div>
             </ScrollReveal>
 
@@ -315,9 +316,9 @@ export default function About() {
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', fontWeight: '300' }}>
                   {lang === 'ar' ? 'التخطيط وإدارة سلاسل الإمداد الزراعية.' : 'Planning and managing agricultural chains.'}
                 </p>
-                <button style={{ marginTop: 'auto', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px' }}>
+                <Link href="/services" style={{ marginTop: 'auto', display: 'inline-block', textAlign: 'center', alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start', background: '#000000', color: '#ffffff', border: 'none', padding: '0.6rem 1.8rem', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '1px', textDecoration: 'none' }}>
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Explore'}
-                </button>
+                </Link>
               </div>
             </ScrollReveal>
           </div>
