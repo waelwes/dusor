@@ -59,9 +59,6 @@ export default function Home() {
             {/* Column 1: Localized Content */}
             <ScrollReveal animation="fade-right">
             <div style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}>
-              <div style={{ display: 'inline-flex', padding: '0.4rem 1.2rem', background: '#000000', color: '#ffffff', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '1.5rem', letterSpacing: '0.5px' }}>
-                {lang === 'ar' ? 'رؤية 2030 والاستدامة' : 'Vision 2030 & Sustainability'}
-              </div>
               <h2 style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '1.3', marginBottom: '1.5rem', color: '#000000' }}>
                 {lang === 'ar' ? 'شريككم الاستراتيجي لدعم الأمن المائي والغذائي' : 'Your Strategic Partner for Water & Food Security'}
               </h2>
@@ -211,7 +208,7 @@ export default function Home() {
         <div style={{ width: '100%' }}>
           <ScrollReveal animation="fade-up">
           <div style={{ textAlign: 'center', marginBottom: '6rem', padding: '0 2rem' }}>
-            <h2 className="text-gradient" style={{ fontSize: '2.8rem', fontWeight: '800', lineHeight: '1.2', marginBottom: '0' }}>{t.servicesTitle}</h2>
+            <h2 style={{ color: '#000000', fontSize: '2.8rem', fontWeight: '800', lineHeight: '1.2', marginBottom: '0' }}>{t.servicesTitle}</h2>
             <div style={{ width: '80px', height: '4px', background: '#92c26e', borderRadius: '2px', margin: '1.5rem auto 1.5rem auto' }} />
           </div>
           </ScrollReveal>
@@ -242,7 +239,7 @@ export default function Home() {
                     <span style={{ color: '#c29d59', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1rem' }}>
                       {lang === 'ar' ? 'خدمة رئيسية' : 'OUR SERVICE'}
                     </span>
-                    <h3 style={{ color: '#1a4a1a', fontSize: '1.8rem', fontWeight: '800', marginBottom: '1.2rem', lineHeight: '1.3', textTransform: 'uppercase' }}>
+                    <h3 style={{ color: '#000000', fontSize: '1.8rem', fontWeight: '800', marginBottom: '1.2rem', lineHeight: '1.3', textTransform: 'uppercase' }}>
                       {item.title}
                     </h3>
                     <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.8', margin: '0 0 2rem 0' }}>
@@ -266,7 +263,7 @@ export default function Home() {
       <section className="section" style={{ background: '#f0f7ea', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '4rem 0 5rem 0' }}>
         <div style={{ width: '100%' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem', padding: '0 2rem' }}>
-            <h2 className="text-gradient" style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '0' }}>
+            <h2 style={{ color: '#000000', fontSize: '2.5rem', fontWeight: '800', marginBottom: '0' }}>
               {lang === 'ar' ? 'مجالات تفوقنا التقني والهندسي' : 'Our Technical & Engineering Sectors'}
             </h2>
             <div style={{ width: '80px', height: '4px', background: '#92c26e', borderRadius: '2px', margin: '1rem auto 1.5rem auto' }} />
@@ -286,7 +283,7 @@ export default function Home() {
                 />
                 <div style={{ position: 'absolute', bottom: '-2px', left: '-2px', right: '-2px', background: '#ffffff', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.2rem 1.5rem 1.3rem', textAlign: 'start', clipPath: lang === 'ar' ? 'polygon(60px 0, 100% 0, 100% 100%, 0 100%)' : 'polygon(0 0, calc(100% - 60px) 0, 100% 100%, 0 100%)' }}>
                   <span style={{ color: '#2d6a1f', fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.3rem' }}>{s.label}</span>
-                  <h4 style={{ color: '#1a4a1a', fontSize: '0.98rem', fontWeight: '800', margin: 0, lineHeight: '1.4' }}>{s.title}</h4>
+                  <h4 style={{ color: '#000000', fontSize: '0.98rem', fontWeight: '800', margin: 0, lineHeight: '1.4' }}>{s.title}</h4>
                 </div>
               </div>
             ))}
@@ -380,10 +377,10 @@ export default function Home() {
                     background: '#ffffff',
                     transition: 'background 0.3s ease'
                   }}>
-                    <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: '700', color: '#1a4a1a' }}>
+                    <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: '700', color: '#000000' }}>
                       {item.title}
                     </h4>
-                    <span style={{ fontSize: '1.4rem', fontWeight: '300', color: openAccordion === idx ? '#92c26e' : '#1a4a1a', lineHeight: 1 }}>
+                    <span style={{ fontSize: '1.4rem', fontWeight: '300', color: openAccordion === idx ? '#92c26e' : '#000000', lineHeight: 1 }}>
                       {openAccordion === idx ? '−' : '+'}
                     </span>
                   </div>
@@ -405,7 +402,7 @@ export default function Home() {
       <section className="section" style={{ background: '#f0f7ea', padding: '6rem 0' }}>
         <div style={{ width: '100%', maxWidth: '1800px', margin: '0 auto', padding: '0 2rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <h2 className="text-gradient" style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '1.3', marginBottom: '0' }}>
+            <h2 style={{ color: '#000000', fontSize: '2.5rem', fontWeight: '800', lineHeight: '1.3', marginBottom: '0' }}>
               {lang === 'ar' ? 'آراء عملائنا' : 'Customer Testimonials'}
             </h2>
             <div style={{ width: '80px', height: '4px', background: '#92c26e', borderRadius: '2px', margin: '1rem auto 1.5rem auto' }} />
@@ -452,7 +449,7 @@ export default function Home() {
                     <span style={{ color: '#fff', fontWeight: '700', fontSize: '0.85rem' }}>{t.name.charAt(0)}</span>
                   </div>
                   <div>
-                    <p style={{ margin: 0, fontWeight: '700', fontSize: '0.85rem', color: '#1a4a1a' }}>{t.name}</p>
+                    <p style={{ margin: 0, fontWeight: '700', fontSize: '0.85rem', color: '#000000' }}>{t.name}</p>
                     <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)' }}>{t.role}</p>
                   </div>
                 </div>
@@ -475,7 +472,7 @@ export default function Home() {
             
             {/* Text (Visually Left) */}
             <div style={{ flex: '1 1 50%', textAlign: lang === 'ar' ? 'right' : 'left' }}>
-              <h2 className="text-gradient" style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem', lineHeight: '1.2' }}>
+              <h2 style={{ color: '#000000', fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem', lineHeight: '1.2' }}>
                 {lang === 'ar' ? 'هل أنت مستعد لبدء مشروعك؟' : 'Ready to start your project?'}
               </h2>
               <div style={{ width: '60px', height: '4px', background: '#92c26e', borderRadius: '2px', marginBottom: '1.5rem', marginLeft: lang === 'ar' ? 'auto' : '0', marginRight: lang === 'ar' ? '0' : 'auto' }} />
@@ -539,7 +536,7 @@ export default function Home() {
                     padding: '1rem',
                     borderRadius: '50px',
                     border: 'none',
-                    background: '#1a4a1a',
+                    background: '#000000',
                     color: '#ffffff',
                     fontWeight: '800',
                     fontSize: '1rem',
@@ -550,7 +547,7 @@ export default function Home() {
                     marginTop: '0.5rem'
                   }}
                   onMouseEnter={(e) => { (e.currentTarget.style.background = '#92c26e'); (e.currentTarget.style.color = '#000000'); (e.currentTarget.style.transform = 'translateY(-2px)'); }}
-                  onMouseLeave={(e) => { (e.currentTarget.style.background = '#1a4a1a'); (e.currentTarget.style.color = '#ffffff'); (e.currentTarget.style.transform = 'translateY(0)'); }}
+                  onMouseLeave={(e) => { (e.currentTarget.style.background = '#000000'); (e.currentTarget.style.color = '#ffffff'); (e.currentTarget.style.transform = 'translateY(0)'); }}
                 >
                   {lang === 'ar' ? 'أرسل الطلب' : 'Submit'}
                 </button>

@@ -26,30 +26,33 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${isStickyHeader ? 'scrolled' : ''}`}>
       <div className="container">
-        <Link href="/" className="logo">
-          <img 
-            src={lang === 'ar' ? '/logo/logo.png' : '/logo/Logo_English.png'} 
-            alt="DOSUR" 
-            style={{ 
-              height: '50px', 
-              width: 'auto', 
-              display: 'block',
-              objectFit: 'contain'
-            }} 
-          />
-        </Link>
+        {/* Center: Logo, Nav Links, and Actions */}
+        <div className="navbar-content-group">
+          <Link href="/" className="logo">
+            <img 
+              src={lang === 'ar' ? '/logo/logo.png' : '/logo/Logo_English.png'} 
+              alt="DOSUR" 
+              style={{ 
+                height: '50px', 
+                width: 'auto', 
+                display: 'block',
+                objectFit: 'contain'
+              }} 
+            />
+          </Link>
+  
+          {/* Desktop nav links */}
+          <ul className="nav-links">
+            <li><Link href="/" className={isActive('/')}>{t.home}</Link></li>
+            <li><Link href="/about" className={isActive('/about')}>{t.about}</Link></li>
+            <li><Link href="/services" className={isActive('/services')}>{t.services}</Link></li>
+            <li><Link href="/projects" className={isActive('/projects')}>{t.projects}</Link></li>
 
-        {/* Desktop nav links */}
-        <ul className="nav-links">
-          <li><Link href="/" className={isActive('/')}>{t.home}</Link></li>
-          <li><Link href="/about" className={isActive('/about')}>{t.about}</Link></li>
-          <li><Link href="/services" className={isActive('/services')}>{t.services}</Link></li>
-          <li><Link href="/projects" className={isActive('/projects')}>{t.projects}</Link></li>
-          <li><Link href="/faq" className={isActive('/faq')}>{t.faq}</Link></li>
-          <li><Link href="/contact" className={isActive('/contact')}>{t.contact}</Link></li>
-        </ul>
+            <li><Link href="/contact" className={isActive('/contact')}>{t.contact}</Link></li>
+          </ul>
 
-        <div className="header-actions" style={{ display: 'flex', alignItems: 'center' }}>
+          {/* Actions */}
+          <div className="header-actions" style={{ display: 'flex', alignItems: 'center' }}>
           {/* Language Switch Dropdown */}
           <div className="desktop-only" style={{ position: 'relative' }}>
             <button 
@@ -102,6 +105,7 @@ export default function Navbar() {
             <span style={{ display: 'block', width: '22px', height: '2px', background: isStickyHeader ? 'var(--text-main)' : '#ffffff', borderRadius: '2px', transition: 'all 0.3s', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
           </button>
         </div>
+        </div>
       </div>
 
       {/* Mobile Backdrop Overlay */}
@@ -126,7 +130,7 @@ export default function Navbar() {
           <li><Link href="/about" className={isActive('/about')} onClick={() => setMenuOpen(false)}>{t.about}</Link></li>
           <li><Link href="/services" className={isActive('/services')} onClick={() => setMenuOpen(false)}>{t.services}</Link></li>
           <li><Link href="/projects" className={isActive('/projects')} onClick={() => setMenuOpen(false)}>{t.projects}</Link></li>
-          <li><Link href="/faq" className={isActive('/faq')} onClick={() => setMenuOpen(false)}>{t.faq}</Link></li>
+
           <li><Link href="/contact" className={isActive('/contact')} onClick={() => setMenuOpen(false)}>{t.contact}</Link></li>
           <li style={{ borderBottom: '1px solid rgba(146, 194, 110, 0.1)' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.9rem 0' }}>

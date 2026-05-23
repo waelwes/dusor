@@ -67,7 +67,9 @@ export default function Footer() {
             <li><Link href="/" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t.home}</Link></li>
             <li><Link href="/about" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t.about}</Link></li>
             <li><Link href="/services" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t.services}</Link></li>
+            <li><Link href="/projects" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t.projects}</Link></li>
             <li><Link href="/contact" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t.contact}</Link></li>
+            <li><Link href="/faq" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t.faq}</Link></li>
           </ul>
         </div>
 

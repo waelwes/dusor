@@ -215,6 +215,21 @@ html[dir='rtl'] .section-decorator {
   direction: ltr;
 }
 
+.navbar-content-group {
+  display: flex;
+  align-items: center;
+  gap: 12rem;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbar-content-group {
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
 .nav-links {
   display: flex;
   gap: 2rem;

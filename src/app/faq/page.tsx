@@ -48,10 +48,7 @@ export default function FaqPage() {
     <>
       <section className="hero" style={{ minHeight: '48vh', padding: '140px 0 80px 0', display: 'flex', alignItems: 'center', background: '#000000', color: '#ffffff' }}>
         <div className="container">
-          <div style={{ maxWidth: '820px' }}>
-            <span style={{ display: 'inline-block', padding: '0.45rem 1rem', borderRadius: '999px', background: '#92c26e', color: '#000000', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.5px', marginBottom: '1.2rem' }}>
-              {lang === 'ar' ? 'أسئلة شائعة' : 'FAQ'}
-            </span>
+          <div style={{ textAlign: lang === 'ar' ? 'right' : 'left', width: '100%' }}>
             <h1 style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)', marginBottom: '1rem', color: '#ffffff', fontWeight: '800' }}>
               {lang === 'ar' ? 'الأسئلة التي تساعد العميل على الفهم بسرعة' : 'Questions That Help Clients Understand Fast'}
             </h1>
@@ -68,9 +65,10 @@ export default function FaqPage() {
         <div className="container">
           <ScrollReveal animation="fade-up">
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 className="text-gradient" style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.75rem' }}>
+              <h2 style={{ color: '#000000', fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.75rem' }}>
                 {lang === 'ar' ? 'أجوبة مختصرة وواضحة' : 'Short, Clear Answers'}
               </h2>
+              <div style={{ width: '80px', height: '4px', background: '#92c26e', borderRadius: '2px', margin: '1rem auto 1.5rem auto' }} />
               <p style={{ color: 'var(--text-muted)', maxWidth: '760px', margin: '0 auto', lineHeight: '1.8' }}>
                 {lang === 'ar'
                   ? 'FAQ تكمل صفحة المشاريع لأنها تعطي العميل الثقة قبل أن يرسل الاستفسار.'
@@ -90,7 +88,7 @@ export default function FaqPage() {
                       onClick={() => setOpenIndex(open ? null : index)}
                       style={{ width: '100%', textAlign: lang === 'ar' ? 'right' : 'left', background: 'transparent', border: 'none', padding: '1.2rem 1.4rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'inherit' }}
                     >
-                      <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1a4a1a', lineHeight: '1.5' }}>{faq.question}</span>
+                      <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#000000', lineHeight: '1.5' }}>{faq.question}</span>
                       <span style={{ fontSize: '1.4rem', fontWeight: 300, color: '#92c26e', lineHeight: 1 }}>{open ? '−' : '+'}</span>
                     </button>
                     {open && (
