@@ -63,11 +63,14 @@ export default function Contact() {
                   <h4 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#000000', marginBottom: '0.5rem' }}>
                     {t.hqOffice || "SAUDI ARABIA - Branch Office"}
                   </h4>
-                  <p style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem' }}>
+                  <p style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem', whiteSpace: 'pre-wrap' }}>
                     {t.contactAddress}
                   </p>
                   <p style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem', marginTop: '0.5rem' }}>
-                    {t.contactPhoneWa || "Phone & WhatsApp"}: <span style={{ color: '#4a6b4a', fontWeight: '600' }}>{t.contactPhone}</span>
+                    {t.contactCrLabel || "Commercial Register"}: <span style={{ color: '#4a6b4a', fontWeight: '600' }}>{t.contactCrNumber}</span>
+                  </p>
+                  <p style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem', marginTop: '0.5rem' }}>
+                    {t.contactPhoneWa || "Phone & WhatsApp"}: <span style={{ color: '#4a6b4a', fontWeight: '600', direction: 'ltr', display: 'inline-block' }}>{t.contactPhone}</span>
                   </p>
                   <p style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem' }}>
                     {t.contactEmailLabel || "Email"}: <span style={{ color: '#4a6b4a', fontWeight: '600' }}>{t.contactEmailAddress}</span>

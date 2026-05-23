@@ -51,10 +51,12 @@ export const translations = {
     contactSectionTitle: "اتصل بنا",
     contactDetailsEyebrow: "// تفاصيل التواصل",
     contactDescription: "اتصل بنا أو تفضل بزيارتنا في أي وقت، نسعى للرد على جميع الاستفسارات خلال 24 ساعة في أيام العمل. يسعدنا الإجابة على أسئلتك.",
-    hqOffice: "المملكة العربية السعودية - المقر الرئيسي",
-    contactAddress: "شارع الفرزدق، الملز، الرياض 12629، المملكة العربية السعودية",
-    contactPhoneWa: "الهاتف وواتساب",
-    contactPhone: "+966 11 50 62 863",
+    hqOffice: "المقر الرئيسي",
+    contactAddress: "الرياض، المملكة العربية السعودية\n2961، طريق العروبة، 8309\nالرمز البريدي: 12245",
+    contactPhoneWa: "رقم الهاتف",
+    contactPhone: "+966 59 670 5167",
+    contactCrLabel: "السجل التجاري",
+    contactCrNumber: "7043362321",
     contactEmailLabel: "البريد الإلكتروني",
     contactEmailAddress: "info@dosur.com",
     readyToGetStarted: "هل أنت مستعد للبدء؟",
@@ -67,7 +69,40 @@ export const translations = {
     contactMessage: "الرسالة",
     contactSend: "إرسال",
     ourMailbox: "صندوق البريد الخاص بنا:",
-    footerText: "دوسور شريكك الاستراتيجي لدعم الأمن الغذائي والاستدامة ورؤية 2030."
+    footerText: "دوسور شريكك الاستراتيجي لدعم الأمن الغذائي والاستدامة ورؤية 2030.",
+    aboutTeamTitle: "فريق العمل",
+    team: [
+      {
+        name: "د/ إبراهيم سليمان",
+        title: "المدير العام",
+        desc: "خبرة تتجاوز 15 عاماً في القيادة الاستراتيجية وتطوير الأعمال في قطاعي المهني والاداري، يقود رؤية الشركة نحو التوسع المستدام.",
+        image: "/team/ibrahim.jpg"
+      },
+      {
+        name: "م/ كريم الصغير",
+        title: "المدير التنفيذي",
+        desc: "متخصص في الاستشعار عن بعد ونظم المعلومات الجغرافية، يترجم الرؤية الاستراتيجية إلى حلول تشغيلية دقيقة تدعم اتخاذ القرار.",
+        image: "/team/karim.jpg"
+      },
+      {
+        name: "م/ عدنان العبيدي",
+        title: "مدير الاتصالات والشبكات",
+        desc: "خبير في هندسة الاتصالات وإنترنت الأشياء، يصمم بنى تحتية تقنية متكاملة وعالية الاعتمادية لدعم منصة الشركة الرقمية.",
+        image: "/team/adnan.jpg"
+      },
+      {
+        name: "م/ علي بكاكره",
+        title: "مهندس ميداني رئيسي",
+        desc: "يقود العمليات الهندسية الميدانية لمشاريع المياه والزراعة الذكية، ويضمن تطبيق أعلى معايير الجودة والسلامة في التنفيذ.",
+        image: "/team/ali_b.jpg"
+      },
+      {
+        name: "م/ علي عبدالسلام محمد",
+        title: "مشرف ميداني",
+        desc: "يشرف على سير الأعمال اليومية في مواقع المشاريع، ويضمن مطابقة التنفيذ للمخططات الهندسية والمواصفات الفنية المعتمدة.",
+        image: "/team/ali_s.jpg"
+      }
+    ]
   },
   en: {
     title: "Dosur Technical Consulting",
@@ -121,10 +156,12 @@ export const translations = {
     contactSectionTitle: "Contact Us",
     contactDetailsEyebrow: "// CONTACT DETAILS",
     contactDescription: "Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days. We will be happy to answer your questions.",
-    hqOffice: "SAUDI ARABIA - Branch Office",
-    contactAddress: "Al Farazdeq St, Al Malaz, Riyadh 12629 , Saudi Arabia",
-    contactPhoneWa: "Phone & WhatsApp",
-    contactPhone: "+966 11 50 62 863",
+    hqOffice: "Headquarters",
+    contactAddress: "Riyadh, Saudi Arabia\n2961, Al Oruba Road, 8309\nPostal Code: 12245",
+    contactPhoneWa: "Phone Number",
+    contactPhone: "+966 59 670 5167",
+    contactCrLabel: "Commercial Register",
+    contactCrNumber: "7043362321",
     contactEmailLabel: "Email",
     contactEmailAddress: "info@dosur.com",
     readyToGetStarted: "Ready to Get Started?",
@@ -137,7 +174,40 @@ export const translations = {
     contactMessage: "Message",
     contactSend: "Submit",
     ourMailbox: "Our Mailbox:",
-    footerText: "Dosur is your strategic partner for supporting food security, sustainability, and Vision 2030."
+    footerText: "Dosur is your strategic partner for supporting food security, sustainability, and Vision 2030.",
+    aboutTeamTitle: "The Team",
+    team: [
+      {
+        name: "Dr. Ibrahim Suleiman",
+        title: "General Manager",
+        desc: "Over 15 years of experience in strategic leadership and business development in professional and administrative sectors, driving the company's vision towards sustainable expansion.",
+        image: "/team/ibrahim.jpg"
+      },
+      {
+        name: "Eng. Karim Al-Sagheer",
+        title: "Executive Director",
+        desc: "Specialized in remote sensing and GIS, translating strategic vision into precise operational solutions that support decision making.",
+        image: "/team/karim.jpg"
+      },
+      {
+        name: "Eng. Adnan Al-Obeidi",
+        title: "Communications & Networks Manager",
+        desc: "Expert in communications engineering and IoT, designing integrated, highly reliable technical infrastructures to support the company's digital platform.",
+        image: "/team/adnan.jpg"
+      },
+      {
+        name: "Eng. Ali Bakakrah",
+        title: "Chief Field Engineer",
+        desc: "Leads field engineering operations for water and smart agriculture projects, ensuring the application of the highest quality and safety standards in execution.",
+        image: "/team/ali_b.jpg"
+      },
+      {
+        name: "Eng. Ali Abdul Salam Mohammed",
+        title: "Field Supervisor",
+        desc: "Supervises daily operations at project sites, ensuring execution matches engineering plans and approved technical specifications.",
+        image: "/team/ali_s.jpg"
+      }
+    ]
   }
 };
 

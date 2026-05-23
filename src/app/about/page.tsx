@@ -324,6 +324,36 @@ export default function About() {
           </div>
         </div>
       </section>
+      {/* 5. Our Team Section */}
+      <section className="section" style={{ background: '#f8faf6', padding: '6rem 0' }}>
+        <div className="container">
+          <ScrollReveal animation="fade-up">
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+              <h2 style={{ color: '#000000', fontSize: '2.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                {t.aboutTeamTitle}
+              </h2>
+              <div style={{ width: '60px', height: '4px', background: '#92c26e', margin: '1rem auto' }} />
+            </div>
+          </ScrollReveal>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3rem', justifyContent: 'center' }}>
+            {t.team && t.team.map((member: any, idx: number) => (
+              <ScrollReveal key={idx} animation="fade-up" delay={idx * 100}>
+                <div style={{ width: '300px', textAlign: 'center', background: '#ffffff', padding: '2.5rem 1.5rem', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
+                  <div style={{ width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginBottom: '1.5rem', border: '4px solid #f8faf6', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>
+                    <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.currentTarget.src = 'https://via.placeholder.com/150/92c26e/ffffff?text=Photo'; }} />
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#1a1a1a', marginBottom: '0.2rem' }}>{member.name}</h3>
+                  <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#013e89', marginBottom: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{member.title}</h4>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.6', fontWeight: '300' }}>
+                    {member.desc}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
     </>
   );

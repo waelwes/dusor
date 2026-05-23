@@ -86,7 +86,7 @@ export default function Footer() {
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
               </div>
-              <span>{lang === 'ar' ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia'}</span>
+              <span style={{ whiteSpace: 'pre-wrap' }}>{t.contactAddress}</span>
             </li>
             <li style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
               <div style={{ color: '#92c26e' }}>
@@ -95,7 +95,7 @@ export default function Footer() {
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
               </div>
-              <span dir="ltr">info@dosur.sa</span>
+              <span dir="ltr">{t.contactEmailAddress}</span>
             </li>
             <li style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
               <div style={{ color: '#92c26e' }}>
@@ -103,7 +103,7 @@ export default function Footer() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
               </div>
-              <span dir="ltr">+966 11 000 0000</span>
+              <span dir="ltr">{t.contactPhone}</span>
             </li>
           </ul>
         </div>
