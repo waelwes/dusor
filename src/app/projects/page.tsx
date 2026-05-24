@@ -241,27 +241,6 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* 5. Trusted Partners */}
-      <section style={{ background: '#f8faf6', padding: '6rem 0', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
-        <div className="container">
-          <ScrollReveal animation="fade-up">
-            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-              <h2 style={{ color: '#000000', fontSize: '2rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '2px' }}>
-                {lang === 'ar' ? 'شركاء النجاح' : 'Trusted By Industry Leaders'}
-              </h2>
-            </div>
-            
-            {/* Simple Logo Grid Placeholder */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '4rem', opacity: 0.6 }}>
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} style={{ width: '120px', height: '60px', background: 'rgba(0,0,0,0.1)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ color: 'rgba(0,0,0,0.4)', fontWeight: 'bold' }}>LOGO {i}</span>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* 6. Project Impact & Stats */}
       <section style={{ background: '#000000', padding: '6rem 0', color: '#ffffff', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
